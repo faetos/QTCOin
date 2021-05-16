@@ -1,0 +1,15 @@
+QT_TS = \
+  qt/locale/quirkyturtcoin_de.ts \
+  qt/locale/quirkyturtcoin_en.ts \
+  qt/locale/quirkyturtcoin_en_US.ts \
+  qt/locale/quirkyturtcoin_es.ts \
+  qt/locale/quirkyturtcoin_es_ES.ts \
+  qt/locale/quirkyturtcoin_fr_FR.ts \
+  qt/locale/quirkyturtcoin_hr_HR.ts \
+  qt/locale/quirkyturtcoin_it.ts \
+  qt/locale/quirkyturtcoin_ko_KR.ts \
+  qt/locale/quirkyturtcoin_nl.ts \
+  qt/locale/quirkyturtcoin_pl.ts \
+  qt/locale/quirkyturtcoin_ru.ts \
+  qt/locale/quirkyturtcoin_tr.ts \
+  qt/locale/quirkyturtcoin_zh_CN.ts

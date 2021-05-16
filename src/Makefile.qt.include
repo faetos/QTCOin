@@ -1,0 +1,704 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/quirkyturtcoin-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# quirkyturtcoin qt core #
+include Makefile.qt_locale.include
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/quirkyturtcoin/forms/loadingdialog.ui \
+  qt/quirkyturtcoin/forms/snackbar.ui \
+  qt/quirkyturtcoin/forms/navmenuwidget.ui \
+  qt/quirkyturtcoin/forms/lockunlock.ui \
+  qt/quirkyturtcoin/forms/expandablebutton.ui \
+  qt/quirkyturtcoin/forms/receivedialog.ui \
+  qt/quirkyturtcoin/forms/balancebubble.ui \
+  qt/quirkyturtcoin/forms/topbar.ui \
+  qt/quirkyturtcoin/forms/txrow.ui \
+  qt/quirkyturtcoin/forms/dashboardwidget.ui \
+  qt/quirkyturtcoin/forms/addresslabelrow.ui \
+  qt/quirkyturtcoin/forms/contactdropdownrow.ui \
+  qt/quirkyturtcoin/forms/mninfodialog.ui \
+  qt/quirkyturtcoin/forms/optionbutton.ui \
+  qt/quirkyturtcoin/forms/masternodewizarddialog.ui \
+  qt/quirkyturtcoin/forms/mnrow.ui \
+  qt/quirkyturtcoin/forms/masternodeswidget.ui \
+  qt/quirkyturtcoin/forms/myaddressrow.ui \
+  qt/quirkyturtcoin/forms/csrow.ui \
+  qt/quirkyturtcoin/forms/sendmemodialog.ui \
+  qt/quirkyturtcoin/forms/sendchangeaddressdialog.ui \
+  qt/quirkyturtcoin/forms/sendconfirmdialog.ui \
+  qt/quirkyturtcoin/forms/sendcustomfeedialog.ui \
+  qt/quirkyturtcoin/forms/sendmultirow.ui \
+  qt/quirkyturtcoin/forms/send.ui \
+  qt/quirkyturtcoin/forms/addnewaddressdialog.ui \
+  qt/quirkyturtcoin/forms/addnewcontactdialog.ui \
+  qt/quirkyturtcoin/forms/requestdialog.ui \
+  qt/quirkyturtcoin/forms/receivewidget.ui \
+  qt/quirkyturtcoin/forms/tooltipmenu.ui \
+  qt/quirkyturtcoin/forms/addresseswidget.ui \
+  qt/quirkyturtcoin/forms/defaultdialog.ui \
+  qt/quirkyturtcoin/forms/coldstakingwidget.ui \
+  qt/quirkyturtcoin/settings/forms/settingsbackupwallet.ui \
+  qt/quirkyturtcoin/settings/forms/settingsexportcsv.ui \
+  qt/quirkyturtcoin/settings/forms/settingsbittoolwidget.ui \
+  qt/quirkyturtcoin/settings/forms/settingsconsolewidget.ui \
+  qt/quirkyturtcoin/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/quirkyturtcoin/settings/forms/settingsfaqwidget.ui \
+  qt/quirkyturtcoin/settings/forms/settingsinformationwidget.ui \
+  qt/quirkyturtcoin/settings/forms/settingsmainoptionswidget.ui \
+  qt/quirkyturtcoin/settings/forms/settingssignmessagewidgets.ui \
+  qt/quirkyturtcoin/settings/forms/settingswalletoptionswidget.ui \
+  qt/quirkyturtcoin/settings/forms/settingswalletrepairwidget.ui \
+  qt/quirkyturtcoin/settings/forms/settingswidget.ui \
+  qt/quirkyturtcoin/forms/welcomecontentwidget.ui \
+  qt/quirkyturtcoin/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/quirkyturtcoin/moc_quirkyturtcoingui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_rpcexecutor.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/quirkyturtcoin/moc_loadingdialog.cpp \
+  qt/quirkyturtcoin/moc_pwidget.cpp \
+  qt/quirkyturtcoin/moc_focuseddialog.cpp \
+  qt/quirkyturtcoin/moc_snackbar.cpp \
+  qt/quirkyturtcoin/moc_navmenuwidget.cpp \
+  qt/quirkyturtcoin/moc_lockunlock.cpp \
+  qt/quirkyturtcoin/moc_expandablebutton.cpp \
+  qt/quirkyturtcoin/moc_furabstractlistitemdelegate.cpp \
+  qt/quirkyturtcoin/moc_receivedialog.cpp \
+  qt/quirkyturtcoin/moc_pfborderimage.cpp \
+  qt/quirkyturtcoin/moc_topbar.cpp \
+  qt/quirkyturtcoin/moc_txrow.cpp \
+  qt/quirkyturtcoin/moc_dashboardwidget.cpp \
+  qt/quirkyturtcoin/moc_addresslabelrow.cpp \
+  qt/quirkyturtcoin/moc_contactdropdownrow.cpp \
+  qt/quirkyturtcoin/moc_mninfodialog.cpp \
+  qt/quirkyturtcoin/moc_optionbutton.cpp \
+  qt/quirkyturtcoin/moc_coldstakingmodel.cpp \
+  qt/quirkyturtcoin/moc_mnmodel.cpp \
+  qt/quirkyturtcoin/moc_masternodewizarddialog.cpp \
+  qt/quirkyturtcoin/moc_mnrow.cpp \
+  qt/quirkyturtcoin/moc_masternodeswidget.cpp \
+  qt/quirkyturtcoin/moc_myaddressrow.cpp \
+  qt/quirkyturtcoin/moc_csrow.cpp \
+  qt/quirkyturtcoin/moc_contactsdropdown.cpp \
+  qt/quirkyturtcoin/moc_sendchangeaddressdialog.cpp \
+  qt/quirkyturtcoin/moc_sendconfirmdialog.cpp \
+  qt/quirkyturtcoin/moc_sendcustomfeedialog.cpp \
+  qt/quirkyturtcoin/moc_sendmemodialog.cpp \
+  qt/quirkyturtcoin/moc_sendmultirow.cpp \
+  qt/quirkyturtcoin/moc_send.cpp \
+  qt/quirkyturtcoin/moc_addnewaddressdialog.cpp \
+  qt/quirkyturtcoin/moc_addnewcontactdialog.cpp \
+  qt/quirkyturtcoin/moc_requestdialog.cpp \
+  qt/quirkyturtcoin/moc_receivewidget.cpp \
+  qt/quirkyturtcoin/moc_tooltipmenu.cpp \
+  qt/quirkyturtcoin/moc_addresseswidget.cpp \
+  qt/quirkyturtcoin/moc_defaultdialog.cpp \
+  qt/quirkyturtcoin/moc_coldstakingwidget.cpp \
+  qt/quirkyturtcoin/settings/moc_settingsbackupwallet.cpp \
+  qt/quirkyturtcoin/settings/moc_settingsexportcsv.cpp \
+  qt/quirkyturtcoin/settings/moc_settingsbittoolwidget.cpp \
+  qt/quirkyturtcoin/settings/moc_settingsconsolewidget.cpp \
+  qt/quirkyturtcoin/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/quirkyturtcoin/settings/moc_settingsfaqwidget.cpp \
+  qt/quirkyturtcoin/settings/moc_settingsinformationwidget.cpp \
+  qt/quirkyturtcoin/settings/moc_settingsmainoptionswidget.cpp \
+  qt/quirkyturtcoin/settings/moc_settingssignmessagewidgets.cpp \
+  qt/quirkyturtcoin/settings/moc_settingswalletoptionswidget.cpp \
+  qt/quirkyturtcoin/settings/moc_settingswalletrepairwidget.cpp \
+  qt/quirkyturtcoin/settings/moc_settingswidget.cpp \
+  qt/quirkyturtcoin/moc_welcomecontentwidget.cpp \
+  qt/quirkyturtcoin/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/quirkyturtcoin.moc \
+  qt/intro.moc
+
+QT_QRC_CPP = qt/qrc_quirkyturtcoin.cpp
+QT_QRC = qt/quirkyturtcoin.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_quirkyturtcoin_locale.cpp
+QT_QRC_LOCALE = qt/quirkyturtcoin_locale.qrc
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/quirkyturtcoin/quirkyturtcoingui.h \
+  qt/bitcoinunits.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsmodel.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/rpcexecutor.h \
+  qt/trafficgraphwidget.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/quirkyturtcoin/prunnable.h \
+  qt/quirkyturtcoin/pfborderimage.h \
+  qt/quirkyturtcoin/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/quirkyturtcoin/pwidget.h \
+  qt/quirkyturtcoin/focuseddialog.h \
+  qt/quirkyturtcoin/guitransactionsutils.h \
+  qt/quirkyturtcoin/snackbar.h \
+  qt/quirkyturtcoin/navmenuwidget.h \
+  qt/quirkyturtcoin/lockunlock.h \
+  qt/quirkyturtcoin/receivedialog.h \
+  qt/quirkyturtcoin/furlistrow.h \
+  qt/quirkyturtcoin/furabstractlistitemdelegate.h \
+  qt/quirkyturtcoin/txviewholder.h \
+  qt/quirkyturtcoin/qtutils.h \
+  qt/quirkyturtcoin/expandablebutton.h \
+  qt/quirkyturtcoin/balancebubble.h \
+  qt/quirkyturtcoin/topbar.h \
+  qt/quirkyturtcoin/txrow.h \
+  qt/quirkyturtcoin/addressholder.h \
+  qt/quirkyturtcoin/addressfilterproxymodel.h \
+  qt/quirkyturtcoin/dashboardwidget.h \
+  qt/quirkyturtcoin/addresslabelrow.h \
+  qt/quirkyturtcoin/contactdropdownrow.h \
+  qt/quirkyturtcoin/mninfodialog.h \
+  qt/quirkyturtcoin/optionbutton.h \
+  qt/quirkyturtcoin/coldstakingmodel.h \
+  qt/quirkyturtcoin/mnmodel.h \
+  qt/quirkyturtcoin/masternodewizarddialog.h \
+  qt/quirkyturtcoin/mnrow.h \
+  qt/quirkyturtcoin/masternodeswidget.h \
+  qt/quirkyturtcoin/myaddressrow.h \
+  qt/quirkyturtcoin/csrow.h \
+  qt/quirkyturtcoin/contactsdropdown.h \
+  qt/quirkyturtcoin/sendchangeaddressdialog.h \
+  qt/quirkyturtcoin/sendconfirmdialog.h \
+  qt/quirkyturtcoin/sendcustomfeedialog.h \
+  qt/quirkyturtcoin/sendmemodialog.h \
+  qt/quirkyturtcoin/sendmultirow.h \
+  qt/quirkyturtcoin/send.h \
+  qt/quirkyturtcoin/addnewaddressdialog.h \
+  qt/quirkyturtcoin/addnewcontactdialog.h \
+  qt/quirkyturtcoin/requestdialog.h \
+  qt/quirkyturtcoin/receivewidget.h \
+  qt/quirkyturtcoin/tooltipmenu.h \
+  qt/quirkyturtcoin/addresseswidget.h \
+  qt/quirkyturtcoin/defaultdialog.h \
+  qt/quirkyturtcoin/coldstakingwidget.h \
+  qt/quirkyturtcoin/settings/settingsbackupwallet.h \
+  qt/quirkyturtcoin/settings/settingsexportcsv.h \
+  qt/quirkyturtcoin/settings/settingsbittoolwidget.h \
+  qt/quirkyturtcoin/settings/settingsconsolewidget.h \
+  qt/quirkyturtcoin/settings/settingsdisplayoptionswidget.h \
+  qt/quirkyturtcoin/settings/settingsfaqwidget.h \
+  qt/quirkyturtcoin/settings/settingsinformationwidget.h \
+  qt/quirkyturtcoin/settings/settingsmainoptionswidget.h \
+  qt/quirkyturtcoin/settings/settingssignmessagewidgets.h \
+  qt/quirkyturtcoin/settings/settingswalletoptionswidget.h \
+  qt/quirkyturtcoin/settings/settingswalletrepairwidget.h \
+  qt/quirkyturtcoin/settings/settingswidget.h \
+  qt/quirkyturtcoin/welcomecontentwidget.h \
+  qt/quirkyturtcoin/splash.h
+
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/ic-transaction-received.svg \
+  qt/res/icons/ic-transaction-mint.svg \
+  qt/res/icons/ic-transaction-sent.svg \
+  qt/res/icons/ic-transaction-staked.svg \
+  qt/quirkyturtcoin/res/img/bg-dashboard-banner.png \
+  qt/quirkyturtcoin/res/img/bg-multi-number-dark.svg \
+  qt/quirkyturtcoin/res/img/ic-check-locked.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-address.svg \
+  qt/quirkyturtcoin/res/img/ic-update.svg \
+  qt/quirkyturtcoin/res/img/bg-multi-number.svg \
+  qt/quirkyturtcoin/res/img/ic-check-mint-off.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-cold-staking.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-cold-staking-active.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-dashboard-active.svg \
+  qt/quirkyturtcoin/res/img/ic-wallet-status-locked.svg \
+  qt/quirkyturtcoin/res/img/bg-splash.svg \
+  qt/quirkyturtcoin/res/img/bg-splash.png \
+  qt/quirkyturtcoin/res/img/ic-check-mint.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-dashboard-hover.svg \
+  qt/quirkyturtcoin/res/img/ic-wallet-status-staking.svg \
+  qt/quirkyturtcoin/res/img/ic-check-peers-off.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-dashboard.svg \
+  qt/quirkyturtcoin/res/img/ic-wallet-status-unlocked.svg \
+  qt/quirkyturtcoin/res/img/ic-check-peers.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-master-active.svg \
+  qt/quirkyturtcoin/res/img/ic-watch-password-white.svg \
+  qt/quirkyturtcoin/res/img/bg-welcome-container.jpg \
+  qt/quirkyturtcoin/res/img/bg-welcome-container.png \
+  qt/quirkyturtcoin/res/img/bg-welcome-container.svg \
+  qt/quirkyturtcoin/res/img/bg-welcome-container@2x.png \
+  qt/quirkyturtcoin/res/img/bg-welcome-container@3x.png \
+  qt/quirkyturtcoin/res/img/ic-check-staking-off.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-master-hover.svg \
+  qt/quirkyturtcoin/res/img/ic-watch-password.svg \
+  qt/quirkyturtcoin/res/img/bg-welcome.jpg \
+  qt/quirkyturtcoin/res/img/bg-welcome.svg \
+  qt/quirkyturtcoin/res/img/bg-welcome@2x.jpg \
+  qt/quirkyturtcoin/res/img/bg-welcome@3x.jpg \
+  qt/quirkyturtcoin/res/img/bg-welcome.png \
+  qt/quirkyturtcoin/res/img/ic-check-staking.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-master.svg \
+  qt/quirkyturtcoin/res/img/img-dashboard-banner.jpg \
+  qt/quirkyturtcoin/res/img/btn-radio-active.svg \
+  qt/quirkyturtcoin/res/img/ic-check-sync-off.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-privacy-active.svg \
+  qt/quirkyturtcoin/res/img/img-empty-contacts.svg \
+  qt/quirkyturtcoin/res/img/btn-radio-off.svg \
+  qt/quirkyturtcoin/res/img/ic-check-sync.png \
+  qt/quirkyturtcoin/res/img/ic-nav-privacy-hover.svg \
+  qt/quirkyturtcoin/res/img/img-empty-dark-contacts.svg \
+  qt/quirkyturtcoin/res/img/ic-contact-arrow-down.svg \
+  qt/quirkyturtcoin/res/img/ic-contact-arrow-down-white.svg \
+  qt/quirkyturtcoin/res/img/ic-check-sync.svg \
+  qt/quirkyturtcoin/res/img/ic-check-faq.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-privacy.svg \
+  qt/quirkyturtcoin/res/img/img-empty-dark-error.svg \
+  qt/quirkyturtcoin/res/img/ic-add-label.svg \
+  qt/quirkyturtcoin/res/img/ic-pending.svg \
+  qt/quirkyturtcoin/res/img/ic-check-theme-dark.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-receive-active.svg \
+  qt/quirkyturtcoin/res/img/img-empty-dark-masternode.svg \
+  qt/quirkyturtcoin/res/img/ic-add-liliac.svg \
+  qt/quirkyturtcoin/res/img/ic-check-theme-light.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-receive-hover.svg \
+  qt/quirkyturtcoin/res/img/img-empty-dark-multisend.svg \
+  qt/quirkyturtcoin/res/img/ic-add-purple.svg \
+  qt/quirkyturtcoin/res/img/ic-check-white.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-receive.svg \
+  qt/quirkyturtcoin/res/img/img-empty-dark-peers.svg \
+  qt/quirkyturtcoin/res/img/ic-add.svg \
+  qt/quirkyturtcoin/res/img/ic-check.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-send-active.svg \
+  qt/quirkyturtcoin/res/img/img-empty-dark-staking-off.svg \
+  qt/quirkyturtcoin/res/img/img-empty-dark-staking-on.svg \
+  qt/quirkyturtcoin/res/img/ic-address-book-grey.svg \
+  qt/quirkyturtcoin/res/img/ic-chevron-left.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-send-hover.svg \
+  qt/quirkyturtcoin/res/img/img-empty-dark-transactions.svg \
+  qt/quirkyturtcoin/res/img/ic-address-book-white.svg \
+  qt/quirkyturtcoin/res/img/ic-chevron-right.svg \
+  qt/quirkyturtcoin/res/img/ic-chevron-right-liliac.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-send.svg \
+  qt/quirkyturtcoin/res/img/img-empty-error.svg \
+  qt/quirkyturtcoin/res/img/ic-address-book.svg \
+  qt/quirkyturtcoin/res/img/ic-clear-liliac.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-settings-active.svg \
+  qt/quirkyturtcoin/res/img/img-empty-masternode.svg \
+  qt/quirkyturtcoin/res/img/ic-address-send-white.svg \
+  qt/quirkyturtcoin/res/img/ic-clear-purple.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-settings-hover.svg \
+  qt/quirkyturtcoin/res/img/img-empty-multisend.svg \
+  qt/quirkyturtcoin/res/img/ic-address-send.svg \
+  qt/quirkyturtcoin/res/img/ic-close-white.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-settings.svg \
+  qt/quirkyturtcoin/res/img/img-empty-peers.svg \
+  qt/quirkyturtcoin/res/img/img-empty-privacy.svg \
+  qt/quirkyturtcoin/res/img/img-empty-privacy-dark.svg \
+  qt/quirkyturtcoin/res/img/ic-arrow-drop-down-white.svg \
+  qt/quirkyturtcoin/res/img/ic-close.svg \
+  qt/quirkyturtcoin/res/img/ic-radio-liliac-on.svg \
+  qt/quirkyturtcoin/res/img/img-empty-staking-off.svg \
+  qt/quirkyturtcoin/res/img/ic-arrow-drop-down.svg \
+  qt/quirkyturtcoin/res/img/ic-coin-qrtc.svg \
+  qt/quirkyturtcoin/res/img/ic-receive-off.svg \
+  qt/quirkyturtcoin/res/img/img-empty-staking-on.svg \
+  qt/quirkyturtcoin/res/img/ic-arrow-drop-up-white.svg \
+  qt/quirkyturtcoin/res/img/ic-coin-zqrtc.png \
+  qt/quirkyturtcoin/res/img/ic-receive-on.svg \
+  qt/quirkyturtcoin/res/img/img-empty-transactions.svg \
+  qt/quirkyturtcoin/res/img/ic-arrow-drop-up.svg \
+  qt/quirkyturtcoin/res/img/ic-coin-zqrtc.svg \
+  qt/quirkyturtcoin/res/img/ic-received.svg \
+  qt/quirkyturtcoin/res/img/img-logo-quirkyturtcoin.png \
+  qt/quirkyturtcoin/res/img/ic-arrow-drop-white-down.svg \
+  qt/quirkyturtcoin/res/img/ic-combo-box.svg \
+  qt/quirkyturtcoin/res/img/ic-send.svg \
+  qt/quirkyturtcoin/res/img/img-logo-quirkyturtcoin@2x.png \
+  qt/quirkyturtcoin/res/img/ic-arrow-purple-down.svg \
+  qt/quirkyturtcoin/res/img/ic-connect.svg \
+  qt/quirkyturtcoin/res/img/ic-submenu-lock.svg \
+  qt/quirkyturtcoin/res/img/img-logo-quirkyturtcoin@3x.png \
+  qt/quirkyturtcoin/res/img/img-logo-quirkyturtcoin.svg \
+  qt/quirkyturtcoin/res/img/ic-arrow-right-white.svg \
+  qt/quirkyturtcoin/res/img/ic-arrow-left-white.svg \
+  qt/quirkyturtcoin/res/img/ic-arrow-left.svg \
+  qt/quirkyturtcoin/res/img/ic-copy-liliac.svg \
+  qt/quirkyturtcoin/res/img/ic-submenu-staking.svg \
+  qt/quirkyturtcoin/res/img/img-nav-logo-quirkyturtcoin.png \
+  qt/quirkyturtcoin/res/img/ic-arrow-right.svg \
+  qt/quirkyturtcoin/res/img/ic-copy.svg \
+  qt/quirkyturtcoin/res/img/ic-copy-big.svg \
+  qt/quirkyturtcoin/res/img/ic-copy-big-white.svg \
+  qt/quirkyturtcoin/res/img/ic-submenu-unlock.svg \
+  qt/quirkyturtcoin/res/img/img-nav-logo.png \
+  qt/quirkyturtcoin/res/img/ic-arrow-white-left.svg \
+  qt/quirkyturtcoin/res/img/ic-exit.svg \
+  qt/quirkyturtcoin/res/img/ic-switch-liliac-on.svg \
+  qt/quirkyturtcoin/res/img/img-nav-logo.svg \
+  qt/quirkyturtcoin/res/img/ic-arrow-white-right.svg \
+  qt/quirkyturtcoin/res/img/ic-expand.svg \
+  qt/quirkyturtcoin/res/img/ic-switch-off.svg \
+  qt/quirkyturtcoin/res/img/img-qr-test-big.png \
+  qt/quirkyturtcoin/res/img/ic-check-active.svg \
+  qt/quirkyturtcoin/res/img/ic-folder.svg \
+  qt/quirkyturtcoin/res/img/ic-switch-on.svg \
+  qt/quirkyturtcoin/res/img/img-qr-test.png \
+  qt/quirkyturtcoin/res/img/ic-check-box.svg \
+  qt/quirkyturtcoin/res/img/ic-check-box-dark-active.svg \
+  qt/quirkyturtcoin/res/img/ic-check-box-indeterminate.svg \
+  qt/quirkyturtcoin/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/quirkyturtcoin/res/img/ic-label-liliac.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-warning.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-mint.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-mint-inactive.svg \
+  qt/quirkyturtcoin/res/img/ic-check-cold-staking.svg \
+  qt/quirkyturtcoin/res/img/ic-check-cold-staking-off.svg \
+  qt/quirkyturtcoin/res/img/ic-check-cold-staking-enabled.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-cs-contract.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-cs-contract-inactive.svg \
+  qt/quirkyturtcoin/res/img/img-qr.svg \
+  qt/quirkyturtcoin/res/img/ic-check-connect-off.svg \
+  qt/quirkyturtcoin/res/img/ic-check-tor-off.svg \
+  qt/quirkyturtcoin/res/img/ic-check-tor.svg \
+  qt/quirkyturtcoin/res/img/ic-label.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-received.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-received.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-warning.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-mint.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-mint-inactive.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-received-inactive.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-received-inactive.svg \
+  qt/quirkyturtcoin/res/img/img-welcome-step1.png \
+  qt/quirkyturtcoin/res/img/ic-check-connect.svg \
+  qt/quirkyturtcoin/res/img/ic-menu-hover.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-sent.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-sent-inactive.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-sent.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/quirkyturtcoin/res/img/img-welcome-step2.png \
+  qt/quirkyturtcoin/res/img/ic-check-dark.svg \
+  qt/quirkyturtcoin/res/img/ic-mint.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-staked.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-staked-inactive.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-staked.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-staked-inactive.svg \
+  qt/quirkyturtcoin/res/img/img-welcome-step3.png \
+  qt/quirkyturtcoin/res/img/ic-check-liliac-on.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-address-active.svg \
+  qt/quirkyturtcoin/res/img/ic-unlock-staking.svg \
+  qt/quirkyturtcoin/res/img/img-welcome-step4.png \
+  qt/quirkyturtcoin/res/img/ic-check-locked-off.svg \
+  qt/quirkyturtcoin/res/img/ic-nav-address-hover.svg \
+  qt/quirkyturtcoin/res/img/ic-update-liliac.svg \
+  qt/quirkyturtcoin/res/img/ic-arrow-drop-down-purple.svg \
+  qt/quirkyturtcoin/res/img/ic-arrow-drop-up-purple.svg \
+  qt/quirkyturtcoin/res/img/ic-check-liliac-indeterminate.svg \
+  qt/quirkyturtcoin/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-stake-delegated.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-stake-delegated-inactive.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-stake-hot.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-stake-hot-inactive.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-stake-hot.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-stake-hot-inactive.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-stake-delegated.svg \
+  qt/quirkyturtcoin/res/img/dark/ic-transaction-stake-delegated-inactive.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-cs-contract.svg \
+  qt/quirkyturtcoin/res/img/ic-transaction-cs-contract-inactive.svg \
+  qt/quirkyturtcoin/res/img/ic-check-box-indeterminate.svg \
+  qt/quirkyturtcoin/res/img/ic-information.svg \
+  qt/quirkyturtcoin/res/img/ic-information-hover.svg \
+  qt/quirkyturtcoin/res/img/ani-loading-dark.gif \
+  qt/quirkyturtcoin/res/img/ani-loading.gif
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/quirkyturtcoin/quirkyturtcoingui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/rpcexecutor.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentserver.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/quirkyturtcoin/loadingdialog.cpp \
+  qt/quirkyturtcoin/pwidget.cpp \
+  qt/quirkyturtcoin/focuseddialog.cpp \
+  qt/quirkyturtcoin/guitransactionsutils.cpp \
+  qt/quirkyturtcoin/snackbar.cpp \
+  qt/quirkyturtcoin/navmenuwidget.cpp \
+  qt/quirkyturtcoin/lockunlock.cpp \
+  qt/quirkyturtcoin/receivedialog.cpp \
+  qt/quirkyturtcoin/furabstractlistitemdelegate.cpp \
+  qt/quirkyturtcoin/txviewholder.cpp \
+  qt/quirkyturtcoin/qtutils.cpp \
+  qt/quirkyturtcoin/expandablebutton.cpp \
+  qt/quirkyturtcoin/balancebubble.cpp \
+  qt/quirkyturtcoin/topbar.cpp \
+  qt/quirkyturtcoin/txrow.cpp \
+  qt/quirkyturtcoin/addressholder.cpp \
+  qt/quirkyturtcoin/addressfilterproxymodel.cpp \
+  qt/quirkyturtcoin/dashboardwidget.cpp \
+  qt/quirkyturtcoin/addresslabelrow.cpp \
+  qt/quirkyturtcoin/contactdropdownrow.cpp \
+  qt/quirkyturtcoin/contactsdropdown.cpp \
+  qt/quirkyturtcoin/optionbutton.cpp \
+  qt/quirkyturtcoin/mninfodialog.cpp \
+  qt/quirkyturtcoin/coldstakingmodel.cpp \
+  qt/quirkyturtcoin/mnmodel.cpp \
+  qt/quirkyturtcoin/masternodewizarddialog.cpp \
+  qt/quirkyturtcoin/mnrow.cpp \
+  qt/quirkyturtcoin/masternodeswidget.cpp \
+  qt/quirkyturtcoin/myaddressrow.cpp \
+  qt/quirkyturtcoin/csrow.cpp \
+  qt/quirkyturtcoin/sendchangeaddressdialog.cpp \
+  qt/quirkyturtcoin/sendconfirmdialog.cpp \
+  qt/quirkyturtcoin/sendcustomfeedialog.cpp \
+  qt/quirkyturtcoin/sendmemodialog.cpp \
+  qt/quirkyturtcoin/sendmultirow.cpp \
+  qt/quirkyturtcoin/send.cpp \
+  qt/quirkyturtcoin/addnewaddressdialog.cpp \
+  qt/quirkyturtcoin/addnewcontactdialog.cpp \
+  qt/quirkyturtcoin/requestdialog.cpp \
+  qt/quirkyturtcoin/receivewidget.cpp \
+  qt/quirkyturtcoin/tooltipmenu.cpp \
+  qt/quirkyturtcoin/addresseswidget.cpp \
+  qt/quirkyturtcoin/defaultdialog.cpp \
+  qt/quirkyturtcoin/coldstakingwidget.cpp \
+  qt/quirkyturtcoin/settings/settingsbackupwallet.cpp \
+  qt/quirkyturtcoin/settings/settingsexportcsv.cpp \
+  qt/quirkyturtcoin/settings/settingsbittoolwidget.cpp \
+  qt/quirkyturtcoin/settings/settingsconsolewidget.cpp \
+  qt/quirkyturtcoin/settings/settingsdisplayoptionswidget.cpp \
+  qt/quirkyturtcoin/settings/settingsfaqwidget.cpp \
+  qt/quirkyturtcoin/settings/settingsinformationwidget.cpp \
+  qt/quirkyturtcoin/settings/settingsmainoptionswidget.cpp \
+  qt/quirkyturtcoin/settings/settingssignmessagewidgets.cpp \
+  qt/quirkyturtcoin/settings/settingswalletoptionswidget.cpp \
+  qt/quirkyturtcoin/settings/settingswalletrepairwidget.cpp \
+  qt/quirkyturtcoin/settings/settingswidget.cpp \
+  qt/quirkyturtcoin/welcomecontentwidget.cpp \
+  qt/quirkyturtcoin/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/quirkyturtcoin/res/css/style_dark.css \
+  qt/quirkyturtcoin/res/css/style_light.css
+
+BITCOIN_RC = qt/res/quirkyturtcoin-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_quirkyturtcoin_qt_OBJECTS) : | $(QT_MOC)
+
+# quirkyturtcoin-qt binary #
+qt_quirkyturtcoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_quirkyturtcoin_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_quirkyturtcoin_qt_SOURCES = qt/quirkyturtcoin.cpp
+if TARGET_DARWIN
+  qt_quirkyturtcoin_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_quirkyturtcoin_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_quirkyturtcoin_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_quirkyturtcoin_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_quirkyturtcoin_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_quirkyturtcoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBSAPLING) $(LIBRUSTZCASH) $(LIBZCASH_LIBS) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_quirkyturtcoin_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_quirkyturtcoin_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/quirkyturtcoinstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/quirkyturtcoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/quirkyturtcoin.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/quirkyturtcoin_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name quirkyturtcoin_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name quirkyturtcoin $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/quirkyturtcoin/*.gcda qt/quirkyturtcoin/*.gcno qt/quirkyturtcoin/settings/*.gcda qt/quirkyturtcoin/settings/*.gcno qt/temp_quirkyturtcoin_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+quirkyturtcoin_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_quirkyturtcoin_qt_OBJECTS) qt/quirkyturtcoin-qt$(EXEEXT) $(LIBBITCOINQT)
+
+quirkyturtcoin_qt : qt/quirkyturtcoin-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

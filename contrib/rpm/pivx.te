@@ -1,0 +1,81 @@
+policy_module(quirkyturtcoin, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type quirkyturtcoin_t;
+type quirkyturtcoin_exec_t;
+init_daemon_domain(quirkyturtcoin_t, quirkyturtcoin_exec_t)
+
+permissive quirkyturtcoin_t;
+
+type quirkyturtcoin_initrc_exec_t;
+init_script_file(quirkyturtcoin_initrc_exec_t)
+
+type quirkyturtcoin_conf_t;
+files_type(quirkyturtcoin_conf_t)
+
+type quirkyturtcoin_var_lib_t;
+files_type(quirkyturtcoin_var_lib_t)
+
+type quirkyturtcoin_var_run_t;
+files_type(quirkyturtcoin_var_run_t)
+
+type quirkyturtcoin_port_t;
+corenet_port(quirkyturtcoin_port_t)
+
+########################################
+#
+# quirkyturtcoin local policy
+#
+allow quirkyturtcoin_t self:process { fork };
+
+allow quirkyturtcoin_t self:fifo_file rw_fifo_file_perms;
+allow quirkyturtcoin_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(quirkyturtcoin_t, quirkyturtcoin_conf_t, quirkyturtcoin_conf_t)
+manage_files_pattern(quirkyturtcoin_t, quirkyturtcoin_conf_t, quirkyturtcoin_conf_t)
+
+manage_dirs_pattern(quirkyturtcoin_t, quirkyturtcoin_var_lib_t, quirkyturtcoin_var_lib_t)
+manage_files_pattern(quirkyturtcoin_t, quirkyturtcoin_var_lib_t, quirkyturtcoin_var_lib_t)
+files_var_lib_filetrans(quirkyturtcoin_t, quirkyturtcoin_var_lib_t, { dir file })
+
+manage_dirs_pattern(quirkyturtcoin_t, quirkyturtcoin_var_run_t, quirkyturtcoin_var_run_t)
+manage_files_pattern(quirkyturtcoin_t, quirkyturtcoin_var_run_t, quirkyturtcoin_var_run_t)
+
+sysnet_dns_name_resolve(quirkyturtcoin_t)
+corenet_all_recvfrom_unlabeled(quirkyturtcoin_t)
+
+allow quirkyturtcoin_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(quirkyturtcoin_t)
+corenet_tcp_sendrecv_generic_node(quirkyturtcoin_t)
+corenet_tcp_sendrecv_all_ports(quirkyturtcoin_t)
+corenet_tcp_bind_generic_node(quirkyturtcoin_t)
+
+gen_require(`
+    type quirkyturtcoin_port_t;
+')
+allow quirkyturtcoin_t quirkyturtcoin_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type quirkyturtcoin_port_t;
+')
+allow quirkyturtcoin_t quirkyturtcoin_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(quirkyturtcoin_t)
+
+files_read_etc_files(quirkyturtcoin_t)
+
+miscfiles_read_localization(quirkyturtcoin_t)
+
+sysnet_dns_name_resolve(quirkyturtcoin_t)
+
+allow quirkyturtcoin_t quirkyturtcoin_exec_t:file execute_no_trans;
+allow quirkyturtcoin_t self:process setsched;
+corecmd_exec_ls(quirkyturtcoin_t)
+corenet_tcp_connect_http_port(quirkyturtcoin_t)
+dev_read_urand(quirkyturtcoin_t)
+fs_getattr_xattr_fs(quirkyturtcoin_t)
+kernel_read_system_state(quirkyturtcoin_t)

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=quirkyturtcoin Core
+Comment=quirkyturtcoin P2P Cryptocurrency
+Comment[fr]=quirkyturtcoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=quirkyturtcoin, eşten eşe kriptografik sanal para birimi
+Exec=quirkyturtcoin-qt %u
+Terminal=false
+Type=Application
+Icon=quirkyturtcoin128
+MimeType=x-scheme-handler/quirkyturtcoin;
+Categories=Office;Finance;
+StartupWMClass=quirkyturtcoin-qt
